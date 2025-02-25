@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>ArcGIS Maps For Stasiun GBON</title>
+
+    <style>
+      html,
+      body,
+      arcgis-map {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <script>
+      var esriConfig = {
+        apiKey: "AAPTxy8BH1VEsoebNVZXo8HurLTiALVOIev81A79T9dgUEjC66eWsI56J9NMUam-Nkg2Zgg9zPvwb1qoG0cbBPCsXOYESZuKfl2Gm0__4ZdzrPPH6dIJh_Nz94FZVHyAeK88M5HuRoLh2OST-Rd0qFf3wZ_3_e9RZq0Mep3l5ZB33iYtAT6YfKwr9UTqHBrqHqlWNmqTaw1m1PXQDwyVremAy_K84rrJAIfPFrRut4Rtrdg.AT1_rqPxVFzQ"
+      };
+    </script>
+
+    <!-- Load Calcite components from CDN -->
+    <script type="module" src="https://js.arcgis.com/calcite-components/3.0.3/calcite.esm.js"></script>
+
+    <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.32/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.32/"></script>
+
+    <!-- Load Map components from CDN-->
+    <script
+      type="module"
+      src="https://js.arcgis.com/map-components/4.32/arcgis-map-components.esm.js"
+    ></script>
+
+  </head>
+  <body>
+
+    <arcgis-map basemap="arcgis/imagery" center="117.83192812499723 , -1.337483722466026" zoom="5">
+      <arcgis-zoom position="top-left"></arcgis-zoom>
+    </arcgis-map>
+
+  </body>
+
+  <script>
+    require(["esri/layers/FeatureLayer"], (FeatureLayer) => {
+
+      const arcgisMap = document.querySelector("arcgis-map");
+      arcgisMap.addEventListener("arcgisViewReadyChange", (event) => {
+
+        const trailheadsLayer = new FeatureLayer({
+          url: "https://gis.bmkg.go.id/arcgis/rest/services/Hosted/Stasiun_GBON/FeatureServer"
+        });
+
+        arcgisMap.addLayer(trailheadsLayer);
+
+      });
+
+    });
+  </script>
+</html> 
